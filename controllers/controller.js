@@ -96,11 +96,18 @@ class Controller {
     }
   }
 
-  static logout(req, res) {}
+  static logout(req, res) {
+    req.session.destroy((err) => {
+      if (err) {
+        return res.send(err);
+      }
+
+      res.redirect("/login");
+    });
+  }
 
   // Menu
   static async menuList(req, res) {
-    console.log(req.session);
     try {
       let menus = await Menu.findAll({
         include: Category,
@@ -119,6 +126,14 @@ class Controller {
 
   static async getMenu(req, res) {
     try {
+      const categories = await Category.findAll();
+
+      res.render("addMenu", {
+        categories,
+        errors: null,
+        role: req.session.role,
+        name: req.session.name,
+      });
     } catch (error) {
       res.send(error);
     }
@@ -126,27 +141,88 @@ class Controller {
 
   static async postMenu(req, res) {
     try {
+      const { name, description, price, stock, imageUrl, CategoryId } =
+        req.body;
+
+      await Menu.create({
+        name,
+        description,
+        price,
+        stock,
+        imageUrl,
+        CategoryId,
+      });
+
+      res.redirect("/menus");
     } catch (error) {
-      res.send(error);
+      if (error.name === "SequelizeValidationError") {
+        const errors = error.errors.map((el) => el.message);
+
+        const categories = await Category.findAll();
+
+        res.render("addMenu", {
+          categories,
+          errors,
+          role: req.session.role,
+          name: req.session.name,
+        });
+      } else {
+        res.send(error);
+      }
     }
   }
 
   static async getEditMenu(req, res) {
     try {
+      const { id } = req.params;
+      const menu = await Menu.findByPk(id);
+      const categories = await Category.findAll();
+
+      res.render("editMenu", {
+        menu,
+        categories,
+        errors: null,
+        role: req.session.role,
+        name: req.session.name,
+      });
     } catch (error) {
       res.send(error);
     }
   }
 
   static async postEditMenu(req, res) {
+    const { id } = req.params;
     try {
+      const menu = await Menu.findByPk(id);
+      await menu.update(req.body);
+      res.redirect("/menus");
     } catch (error) {
-      res.send(error);
+      if (error.name === "SequelizeValidationError") {
+        const menu = await Menu.findByPk(id);
+        const categories = await Category.findAll();
+
+        const errors = error.errors.map((el) => el.message);
+
+        res.render("editMenu", {
+          menu,
+          categories,
+          errors,
+          role: req.session.role,
+          name: req.session.name,
+        });
+      } else {
+        res.send(error);
+      }
     }
   }
 
   static async deleteMenu(req, res) {
     try {
+      const { id } = req.params;
+      const menu = await Menu.findByPk(id);
+      await menu.destroy();
+
+      res.redirect("/menus");
     } catch (error) {
       res.send(error);
     }
@@ -162,6 +238,18 @@ class Controller {
 
   static async getOrder(req, res) {
     try {
+      const { menuId } = req.params;
+      const menu = await Menu.findByPk(menuId, {
+        include: Category,
+      });
+
+      res.render("addOrder", {
+        menu,
+        errors: null,
+        role: req.session.role,
+        name: req.session.name,
+        formatRupiah,
+      });
     } catch (error) {
       res.send(error);
     }
@@ -169,6 +257,48 @@ class Controller {
 
   static async postOrder(req, res) {
     try {
+      const { menuId } = req.params;
+      const { quantity } = req.body;
+
+      const menu = await Menu.findByPk(menuId);
+      let order = await Order.findOne({
+        where: {
+          UserId: req.session.userId,
+          status: "Pending",
+        },
+      });
+
+      if (!order) {
+        order = await Order.create({
+          date: new Date(),
+          status: "Pending",
+          totalPrice: 0,
+          UserId: req.session.userId,
+        });
+      }
+
+      const subtotal = menu.price * quantity;
+
+      await OrderDetail.create({
+        OrderId: order.id,
+        MenuId: menu.id,
+        quantity,
+        subtotal,
+      });
+
+      const totalPrice = await OrderDetail.sum("subtotal", {
+        where: {
+          OrderId: order.id,
+        },
+      });
+
+      await order.update({
+        totalPrice,
+      });
+
+      await menu.update({
+        stock: menu.stock - Number(quantity),
+      });
     } catch (error) {
       res.send(error);
     }

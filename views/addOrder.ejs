@@ -1,25 +1,54 @@
 <%- include("partials/navbarUser") %>
 
-<div class="container mt-5">
-  <div class="row justify-content-center">
-    <div class="col-md-6">
-      <div class="card shadow">
-        <img src="<%= menu.imageUrl %>" class="card-img-top" />
-        <div class="card-body">
-          <h3><%= menu.name %></h3>
-          <p><%= menu.description %></p>
-          <h5><%= menu.formatPrice %></h5>
-          <p>Stock : <%= menu.stock %></p>
-          <form action="/orders/add/<%= menu.id %>" method="POST">
-            <label> Quantity </label>
-            <input type="number" name="quantity" class="form-control" />
-            <br />
-            <button class="btn btn-dark w-100">Order</button>
-          </form>
-        </div>
-      </div>
-    </div>
+<h2>Order Coffee</h2>
+
+<form action="/orders/add/<%= menu.id %>" method="POST">
+
+  <div class="mb-3">
+    <label>Menu</label>
+    <input
+      type="text"
+      class="form-control"
+      value="<%= menu.name %>"
+      readonly
+    >
   </div>
-</div>
+
+  <div class="mb-3">
+    <label>Price</label>
+    <input
+      type="text"
+      class="form-control"
+      value="<%= formatRupiah(menu.price) %>"
+      readonly
+    >
+  </div>
+
+  <div class="mb-3">
+    <label>Stock</label>
+    <input
+      type="text"
+      class="form-control"
+      value="<%= menu.stock %>"
+      readonly
+    >
+  </div>
+
+  <div class="mb-3">
+    <label>Quantity</label>
+    <input
+      type="number"
+      name="quantity"
+      class="form-control"
+      min="1"
+      required
+    >
+  </div>
+
+  <button class="btn btn-dark">
+    Order Now
+  </button>
+
+</form>
 
 <%- include("partials/footer") %>

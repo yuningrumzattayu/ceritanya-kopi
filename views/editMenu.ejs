@@ -7,8 +7,19 @@
                 <div class="card-header bg-dark text-white">
                     <h3>Add Menu</h3>
                 </div>
+
+                <% if (errors) { %>
+                    <div class="alert alert-danger">
+                        <ul>
+                        <% errors.forEach(error => { %>
+                            <li><%= error %></li>
+                        <% }) %>
+                        </ul>
+                    </div>
+                    <% } %>
+                    
                 <div class="card-body">
-                    <form action="/menus/add" method="POST">
+                    <form action="/menus/edit/<%= menu.id %>" method="POST">
                         <div class="mb-3">
                             <label>Name</label>
                             <input
@@ -51,21 +62,21 @@
                                 class="form-control"
                                 rows="3"
                                 name="description"
-                                >
-                            </textarea>
+                            ><%= menu.description %></textarea>
                         </div>
 
-                        <div class="mb-3">
-                            <label>Category</label>
-                            <select
-                                class="form-select"
-                                name="CategoryId">
-                                <% categories.forEach(category=>{ %>
-                                    <option value="<%= category.id %>">
-                                        <%= category.id == menu.CategoryId ? "selected" : "" %>>
-                                    </option>
-                                <% }) %>
-                            </select>
+                    <div class="mb-3">
+                        <label>Category</label>
+                        <select class="form-select" name="CategoryId">
+                            <% categories.forEach(category => { %>
+                                <option
+                                    value="<%= category.id %>"
+                                    <%= menu.CategoryId == category.id ? 'selected' : '' %>
+                                >
+                                    <%= category.name %>
+                                </option>
+                            <% }) %>
+                        </select>
                         </div>
                         <button class="btn btn-success w-100">
                             Save Menu

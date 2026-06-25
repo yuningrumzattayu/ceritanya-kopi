@@ -7,6 +7,17 @@
                 <div class="card-header bg-dark text-white">
                     <h3>Add Menu</h3>
                 </div>
+                
+        <% if(errors){ %>
+            <div class="alert alert-danger">
+                <ul>
+                    <% errors.forEach(error => { %>
+                        <li><%= error %></li>
+                    <% }) %>
+                </ul>
+            </div>
+
+            <% } %>
                 <div class="card-body">
                     <form action="/menus/add" method="POST">
                         <div class="mb-3">

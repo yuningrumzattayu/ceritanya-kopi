@@ -24,12 +24,71 @@ module.exports = (sequelize, DataTypes) => {
   }
   Menu.init(
     {
-      name: DataTypes.STRING,
-      price: DataTypes.INTEGER,
+      name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notNull: {
+            msg: "Name is required",
+          },
+          notEmpty: {
+            msg: "Name is required",
+          },
+        },
+      },
+      price: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+          notNull: {
+            msg: "Price is required",
+          },
+          notEmpty: {
+            msg: "Price is required",
+          },
+          min: {
+            args: 1000,
+            msg: "Minimun price is Rp.1000",
+          },
+        },
+      },
       CategoryId: DataTypes.INTEGER,
-      stock: DataTypes.INTEGER,
-      imageUrl: DataTypes.STRING,
-      description: DataTypes.TEXT,
+      stock: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+          notNull: {
+            msg: "Stock name is required",
+          },
+          notEmpty: {
+            msg: "Stock is required",
+          },
+        },
+      },
+      imageUrl: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notNull: {
+            msg: "Image is required",
+          },
+          notEmpty: {
+            msg: "Image is required",
+          },
+        },
+      },
+      description: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+        validate: {
+          notNull: {
+            msg: "Description is required",
+          },
+          notEmpty: {
+            msg: "Description is required",
+          },
+        },
+      },
     },
     {
       sequelize,
