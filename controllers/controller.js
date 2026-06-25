@@ -86,6 +86,10 @@ class Controller {
         });
       }
 
+      req.session.userId = user.id;
+      req.session.role = user.role;
+      req.session.name = user.name;
+
       res.redirect("/menus");
     } catch (error) {
       res.send(error);
@@ -104,9 +108,9 @@ class Controller {
       res.render("menus", {
         menus,
         formatRupiah,
+        role: req.session.role,
+        name: req.session.name,
       });
-
-      res.render("menus");
     } catch (error) {
       res.send(error);
     }

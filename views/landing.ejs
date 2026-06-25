@@ -1,7 +1,6 @@
 <%- include("partials/navbarGuest") %>
 
 <style>
-  /* ── Hero Section ── */
   .hero-section {
     position: relative;
     min-height: 100vh;
@@ -14,7 +13,6 @@
     justify-content: center;
   }
 
-  /* dark overlay agar teks tetap terbaca */
   .hero-section::before {
     content: "";
     position: absolute;
@@ -22,7 +20,6 @@
     background: rgba(0, 0, 0, 0.45);
   }
 
-  /* ── Logo card ── */
   .hero-logo-wrap {
     position: relative;
     z-index: 2;
@@ -39,7 +36,6 @@
     display: block;
   }
 
-  /* ── Text ── */
   .hero-content {
     position: relative;
     z-index: 2;
@@ -72,7 +68,6 @@
     margin-bottom: 32px;
   }
 
-  /* ── Buttons ── */
   .hero-btn-login,
   .hero-btn-register {
     display: inline-block;
@@ -81,7 +76,9 @@
     font-weight: 600;
     font-size: 1rem;
     text-decoration: none;
-    transition: transform 0.15s, box-shadow 0.15s;
+    transition:
+      transform 0.15s,
+      box-shadow 0.15s;
   }
 
   .hero-btn-login {
@@ -115,12 +112,10 @@
 </style>
 
 <section class="hero-section">
-  <!-- Logo -->
   <div class="hero-logo-wrap">
     <img src="/images/logo.png" alt="Ceritanya Kopi Logo" />
   </div>
 
-  <!-- Copy & CTA -->
   <div class="hero-content">
     <h1>Welcome to Ceritanya Kopi</h1>
     <p class="tagline">Fresh Coffee, Fresh Mood</p>
