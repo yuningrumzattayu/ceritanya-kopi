@@ -100,6 +100,7 @@ class Controller {
 
   // Menu
   static async menuList(req, res) {
+    console.log(req.session);
     try {
       let menus = await Menu.findAll({
         include: Category,
