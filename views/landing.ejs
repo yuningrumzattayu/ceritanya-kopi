@@ -1,21 +1,134 @@
 <%- include("partials/navbarGuest") %>
 
-<div class="container">
-  <div class="row justify-content-center align-items-center vh-100">
-    <div class="col-md-8 text-center">
-      <h1 class="display-3 fw-bold">☕</h1>
+<style>
+  /* ── Hero Section ── */
+  .hero-section {
+    position: relative;
+    min-height: 100vh;
+    background-image: url("/images/header.png");
+    background-size: cover;
+    background-position: center top;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
 
-      <h1 class="fw-bold">Welcome to Ceritanya Kopi</h1>
+  /* dark overlay agar teks tetap terbaca */
+  .hero-section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+  }
 
-      <p class="lead text-secondary">Fresh Coffee, Fresh Mood</p>
+  /* ── Logo card ── */
+  .hero-logo-wrap {
+    position: relative;
+    z-index: 2;
+    background: #fdf6ee;
+    border-radius: 12px;
+    padding: 12px 18px;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  }
 
-      <p>Enjoy your favorite coffee anytime and anywhere.</p>
+  .hero-logo-wrap img {
+    width: 110px;
+    height: auto;
+    display: block;
+  }
 
-      <a href="/login" class="btn btn-dark me-2"> Login </a>
+  /* ── Text ── */
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: #ffffff;
+    padding: 0 1rem;
+  }
 
-      <a href="/register" class="btn btn-outline-dark"> Register </a>
-    </div>
+  .hero-content h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 800;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+    margin-bottom: 6px;
+    font-style: italic;
+  }
+
+  .hero-content .tagline {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: #f0e6d3;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+    margin-bottom: 14px;
+    font-style: italic;
+  }
+
+  .hero-content .description {
+    font-size: 1rem;
+    color: #e8ddd0;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+    margin-bottom: 32px;
+  }
+
+  /* ── Buttons ── */
+  .hero-btn-login,
+  .hero-btn-register {
+    display: inline-block;
+    padding: 10px 36px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+
+  .hero-btn-login {
+    background-color: #6b8f5e;
+    color: #ffffff;
+    margin-right: 12px;
+    border: 2px solid #6b8f5e;
+  }
+
+  .hero-btn-login:hover {
+    background-color: #577549;
+    border-color: #577549;
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+  }
+
+  .hero-btn-register {
+    background-color: #6b8f5e;
+    color: #ffffff;
+    border: 2px solid #6b8f5e;
+  }
+
+  .hero-btn-register:hover {
+    background-color: #577549;
+    border-color: #577549;
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+  }
+</style>
+
+<section class="hero-section">
+  <!-- Logo -->
+  <div class="hero-logo-wrap">
+    <img src="/images/logo.png" alt="Ceritanya Kopi Logo" />
   </div>
-</div>
+
+  <!-- Copy & CTA -->
+  <div class="hero-content">
+    <h1>Welcome to Ceritanya Kopi</h1>
+    <p class="tagline">Fresh Coffee, Fresh Mood</p>
+    <p class="description">Enjoy your favorite coffee anytime and anywhere.</p>
+
+    <a href="/login" class="hero-btn-login">Login</a>
+    <a href="/register" class="hero-btn-register">Register</a>
+  </div>
+</section>
 
 <%- include("partials/footer") %>
