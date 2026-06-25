@@ -3,7 +3,7 @@
     "name": "Americano",
     "price": 25000,
     "stock": 20,
-    "imageUrl": "Americano.ppg",
+    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8g8l3svXedPqf_khN9t0FhqqX3ChgNNi0GUr7Yf800Q&s=10",
     "description": "Minuman kopi klasik dengan karakter espresso yang tetap terasa, namun lebih ringan dan mudah dinikmati.",
     "CategoryId": 1
   },
@@ -11,7 +11,7 @@
     "name": "Latte",
     "price": 30000,
     "stock": 15,
-    "imageUrl": "Latte.png",
+    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLdSR46z3G_CumMjQVm9c9K9C0ax4BwRcSeHkbVobpmw&s=10",
     "description": "Perpaduan espresso dan susu segar dengan tekstur yang lembut serta cita rasa kopi yang ringan dan seimbang.",
     "CategoryId": 1
   },
@@ -19,7 +19,7 @@
     "name": "Cappuccino",
     "price": 32000,
     "stock": 12,
-    "imageUrl": "Cappuccino.png",
+    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcST1fOyDrpgUZ7lu2xvMuXV0bMJRH6mR7pSCsiSLyrFyA&s=10",
     "description": "Minuman kopi klasik dengan kombinasi espresso, susu, dan busa susu yang creamy, menghasilkan tekstur lembut dan cita rasa yang kaya.",
     "CategoryId": 1
   },
@@ -27,7 +27,7 @@
     "name": "Matcha Latte",
     "price": 35000,
     "stock": 10,
-    "imageUrl": "Matcha-Latte.png",
+    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTk_OjooCu-z525o8Sb6HAGGrEpvkJoW8wh-ZVlgToCeg&s=10",
     "description": "Matcha pilihan yang dipadukan dengan susu segar, menciptakan keseimbangan sempurna antara rasa teh hijau yang khas dan tekstur yang lembut.",
     "CategoryId": 2
   },
@@ -35,7 +35,7 @@
     "name": "Lemon Tea",
     "price": 20000,
     "stock": 18,
-    "imageUrl": "Lemon-Tea.png",
+    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaUVXskPkTHtCbk43Pv0DrPBNYdnTuqK5dr1SBXuIO5A&s=10",
     "description": "Teh yang diseduh sempurna dengan sentuhan lemon segar, memberikan sensasi ringan dan menyegarkan di setiap tegukan.",
     "CategoryId": 2
   },
@@ -43,7 +43,7 @@
     "name": "Croissant",
     "price": 18000,
     "stock": 8,
-    "imageUrl": "Croissant.png",
+    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSz7uzwXTsKC8zbS-LuweK1Z2WpnTOWT7uXo7tYvu3SsQ&s=10",
     "description": "Croissant panggang dengan tekstur flaky berlapis dan aroma butter yang kaya, sempurna untuk dinikmati bersama kopi atau teh.",
     "CategoryId": 3
   },
@@ -51,7 +51,7 @@
     "name": "Tiramisu",
     "price": 28000,
     "stock": 6,
-    "imageUrl": "Tiramisu.png",
+    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEs6L34v_gkkKXsrD3st3-fWjbFrrniXex62WCeFFSKQ&s=10",
     "description": "Perpaduan creamy mascarpone, espresso, dan cocoa powder yang menghasilkan tekstur lembut serta cita rasa yang kaya dan berkelas..",
     "CategoryId": 3
   },
@@ -59,7 +59,7 @@
     "name": "French Toast",
     "price": 30000,
     "stock": 5,
-    "imageUrl": "french-toast.jpg",
+    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTPd5SmRfxnA5m9-o44wYCFACpBlo9yMFd8YaolRYXwQ&s=10",
     "description": "Roti brioche yang direndam dalam campuran telur dan susu, dipanggang hingga golden brown, lalu disajikan dengan topping pilihan.",
     "CategoryId": 3
   },
@@ -67,15 +67,15 @@
     "name": "Masala Tea",
     "price": 30000,
     "stock": 18,
-    "imageUrl": "Masala-Tea.png",
+    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfXa5oxxZkGw20fOaHyszXIzdCNPtsaSP8pEX1zq2Biw&s=10",
     "description": "Teh rempah khas India dengan kombinasi jahe, kayu manis, kapulaga, dan cengkeh. Hangat, wangi, dan penuh karakter.",
     "CategoryId": 2
   },
   {
-    "name": "Ice Lychee Tea",
+    "name": "Iced Lychee Tea",
     "price": 25000,
     "stock": 18,
-    "imageUrl": "Ice-Lychee-Tea.png",
+    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThai7z-TbSB4Tktz_7uO6CCNq1iz8KdLzA2qWFE4F1Mw&s=10",
     "description": "Teh dingin yang dipadukan dengan aroma dan rasa leci yang khas, menciptakan minuman yang manis, segar, dan menyegarkan.",
     "CategoryId": 2
   }
