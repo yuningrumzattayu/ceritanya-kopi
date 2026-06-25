@@ -1,0 +1,56 @@
+<%- include("partials/navbarGuest") %>
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow">
+        <div class="card-header bg-dark text-white text-center">
+          <h3>Login</h3>
+        </div>
+
+        <% if (errors) { %>
+          <div class="alert alert-danger">
+            <ul class="mb-0">
+              <% errors.forEach(error => { %>
+                <li><%= error %></li>
+              <% }) %>
+            </ul>
+          </div>
+        <% } %>
+        
+        <div class="card-body">
+          <form action="/login" method="POST">
+            <div class="mb-3">
+              <label class="form-label">Email</label>
+
+              <input
+                type="email"
+                class="form-control"
+                name="email"
+                placeholder="Enter your email"
+              />
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Password</label>
+              <input
+                type="password"
+                class="form-control"
+                name="password"
+                placeholder="Enter password"
+              />
+            </div>
+            <button class="btn btn-dark w-100">Login</button>
+          </form>
+          <hr />
+          <p class="text-center">
+            Don't have an account?
+            <a href="/register"> Register </a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include("partials/footer") %>

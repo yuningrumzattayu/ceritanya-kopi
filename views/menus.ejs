@@ -1,0 +1,71 @@
+<%- include("partials/navbarUser") %>
+<div class="container mt-4">
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <h2>☕ Coffee Menu</h2>
+        </div>
+        <div class="col-md-6">
+            <form action="/menus" method="GET">
+                <div class="input-group">
+                    <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Search menu..."
+                        name="search"
+                    >
+                    <button class="btn btn-dark">
+                        Search
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="mb-4 text-end">
+        <a href="/menus/add" class="btn btn-success">
+            + Add Menu
+        </a>
+    </div>
+    <div class="row">
+        <% menus.forEach(menu => { %>
+            <div class="col-md-4 mb-4">
+                <div class="card shadow h-100">
+                    <img
+                        src="<%= menu.imageUrl %>"
+                        class="card-img-top"
+                        style="height:220px; object-fit:cover;"
+                    >
+                    <div class="card-body d-flex flex-column">
+                        <h4><%= menu.name %></h4>
+                        <span class="badge bg-warning text-dark mb-2">
+                            <%= menu.Category.name %>
+                        </span>
+                        <p>
+                            <%= menu.description %>
+                        </p>
+                        <p>
+                            Stock :
+                            <b><%= menu.stock %></b>
+                        </p>
+                        <h5 class="text-success">
+                            <%= formatRupiah(menu.price) %>
+                        </h5>
+                        <div class="mt-auto">
+                            <a
+                                href="/menus/edit/<%= menu.id %>"
+                                class="btn btn-warning">
+                                Edit
+                            </a>
+                            <a
+                                href="/menus/delete/<%= menu.id %>"
+                                class="btn btn-danger">
+                                Delete
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+</div>
+
+<%- include("partials/footer") %>
