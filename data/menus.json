@@ -3,7 +3,7 @@
     "name": "Americano",
     "price": 25000,
     "stock": 20,
-    "imageUrl": "Americano.ppg",
+    "imageUrl": "Americano.png",
     "description": "Minuman kopi klasik dengan karakter espresso yang tetap terasa, namun lebih ringan dan mudah dinikmati.",
     "CategoryId": 1
   },
