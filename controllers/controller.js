@@ -48,35 +48,35 @@ class Controller {
   static async getMenu(req, res) {
     try {
     } catch (error) {
-      console.log(error);
+      res.send(error);
     }
   }
 
   static async postMenu(req, res) {
     try {
     } catch (error) {
-      console.log(error);
+      res.send(error);
     }
   }
 
   static async getEditMenu(req, res) {
     try {
     } catch (error) {
-      console.log(error);
+      res.send(error);
     }
   }
 
   static async postEditMenu(req, res) {
     try {
     } catch (error) {
-      console.log(error);
+      res.send(error);
     }
   }
 
   static async deleteMenu(req, res) {
     try {
     } catch (error) {
-      console.log(error);
+      res.send(error);
     }
   }
 
@@ -84,21 +84,21 @@ class Controller {
   static async orderHistory(req, res) {
     try {
     } catch (error) {
-      console.log(error);
+      res.send(error);
     }
   }
 
   static async getOrder(req, res) {
     try {
     } catch (error) {
-      console.log(error);
+      res.send(error);
     }
   }
 
   static async postOrder(req, res) {
     try {
     } catch (error) {
-      console.log(error);
+      res.send(error);
     }
   }
 }
