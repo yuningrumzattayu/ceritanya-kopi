@@ -1,25 +1,6 @@
 <%- include("partials/navbarGuest") %>
 
 <style>
-  html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    overflow-x: hidden;
-  }
-
-  /* Navbar jadi transparan & absolute supaya tidak makan ruang layout */
-  body > nav {
-    position: absolute !important;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 100;
-    background: transparent !important;
-    box-shadow: none !important;
-  }
-
-  /* Hero betul-betul full viewport — tidak ada sisa */
   .hero-section {
     position: relative;
     width: 100%;
@@ -35,7 +16,6 @@
     padding: 0;
   }
 
-  /* Overlay gelap */
   .hero-section::before {
     content: "";
     position: absolute;
@@ -43,7 +23,6 @@
     background: rgba(0, 0, 0, 0.45);
   }
 
-  /* Logo card */
   .hero-logo-wrap {
     position: relative;
     z-index: 2;
@@ -60,7 +39,6 @@
     display: block;
   }
 
-  /* Teks */
   .hero-content {
     position: relative;
     z-index: 2;
@@ -93,7 +71,6 @@
     margin-bottom: 32px;
   }
 
-  /* Tombol */
   .hero-btn-login,
   .hero-btn-register {
     display: inline-block;
@@ -102,7 +79,12 @@
     font-weight: 600;
     font-size: 1rem;
     text-decoration: none;
-    transition: transform 0.15s, box-shadow 0.15s;
+    transition:
+      transform 0.15s,
+      box-shadow 0.15s;
+  }
+
+  .hero-btn-login {
     background-color: #6b8f5e;
     color: #fff;
     border: 2px solid #6b8f5e;
