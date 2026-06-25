@@ -1,4 +1,5 @@
 <%- include("partials/navbarUser") %>
+
 <div class="container mt-4">
     <div class="row mb-4">
         <div class="col-md-6">
@@ -20,11 +21,13 @@
             </form>
         </div>
     </div>
-    <div class="mb-4 text-end">
-        <a href="/menus/add" class="btn btn-success">
-            + Add Menu
-        </a>
-    </div>
+    <% if (role === "Admin") { %>
+        <div class="mb-4 text-end">
+            <a href="/menus/add" class="btn btn-success">
+                + Add Menu
+            </a>
+        </div>
+    <% } %>
     <div class="row">
         <% menus.forEach(menu => { %>
             <div class="col-md-4 mb-4">
@@ -39,9 +42,7 @@
                         <span class="badge bg-warning text-dark mb-2">
                             <%= menu.Category.name %>
                         </span>
-                        <p>
-                            <%= menu.description %>
-                        </p>
+                        <p><%= menu.description %></p>
                         <p>
                             Stock :
                             <b><%= menu.stock %></b>
@@ -50,16 +51,24 @@
                             <%= formatRupiah(menu.price) %>
                         </h5>
                         <div class="mt-auto">
-                            <a
-                                href="/menus/edit/<%= menu.id %>"
-                                class="btn btn-warning">
-                                Edit
-                            </a>
-                            <a
-                                href="/menus/delete/<%= menu.id %>"
-                                class="btn btn-danger">
-                                Delete
-                            </a>
+                            <% if (role === "Admin") { %>
+                                <a
+                                    href="/menus/edit/<%= menu.id %>"
+                                    class="btn btn-warning">
+                                    Edit
+                              </a>
+                                <a
+                                    href="/menus/delete/<%= menu.id %>"
+                                    class="btn btn-danger">
+                                    Delete
+                                </a>
+                            <% } else { %>
+                                <a
+                                    href="/orders/add/<%= menu.id %>"
+                                    class="btn btn-dark w-100">
+                                    Order
+                                </a>
+                            <% } %>
                         </div>
                     </div>
                 </div>
