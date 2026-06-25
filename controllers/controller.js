@@ -8,7 +8,8 @@ const {
 } = require("../models");
 const bcrypt = require("bcryptjs");
 const { formatRupiah } = require("../helpers/helper");
-const { Op } = require('sequelize');
+const { Op } = require("sequelize");
+const PDFDocument = require("pdfkit");
 
 class Controller {
   // login register
@@ -110,32 +111,34 @@ class Controller {
   // Menu
   static async menuList(req, res) {
     try {
-      const {search} = req.query
+      const { search } = req.query;
+      const { success } = req.query;
 
       let option = {
-        include: Category
-      }
-      if(search){
+        include: Category,
+      };
+      if (search) {
         option.where = {
           [Op.or]: [
             {
               name: {
-                [Op.iLike]: `%${search}%`
-              }
+                [Op.iLike]: `%${search}%`,
+              },
             },
             {
               "$Category.name$": {
-                [Op.iLike]: `%${search}%`
-              }
-            }
-          ]
-        }
+                [Op.iLike]: `%${search}%`,
+              },
+            },
+          ],
+        };
       }
       let menus = await Menu.findAll(option);
 
       res.render("menus", {
         menus,
         search,
+        success,
         formatRupiah,
         role: req.session.role,
         name: req.session.name,
@@ -237,22 +240,60 @@ class Controller {
     }
   }
 
-  static async deleteMenu(req, res) {
-    try {
-      const { id } = req.params;
-      const menu = await Menu.findByPk(id);
-      await menu.destroy();
+  static deleteMenu(req, res) {
+    let deletedMenu;
 
-      res.redirect("/menus");
-    } catch (error) {
-      res.send(error);
-    }
+    Menu.findByPk(req.params.id)
+      .then((menu) => {
+        deletedMenu = menu;
+
+        return Menu.destroy({
+          where: {
+            id: req.params.id,
+          },
+        });
+      })
+      .then(() => {
+        res.redirect(
+          `/menus?success=Menu "${deletedMenu.name}" berhasil dihapus`,
+        );
+      })
+      .catch((error) => {
+        res.send(error);
+      });
   }
 
   // Order
   static async orderHistory(req, res) {
     try {
+      const orders = await Order.findAll({
+        where: {
+          UserId: req.session.userId,
+        },
+        include: {
+          model: OrderDetail,
+          include: {
+            model: Menu,
+            include: Category,
+          },
+        },
+        order: [["date", "DESC"]],
+      });
 
+      const membership = await MembershipCard.findOne({
+        where: {
+          UserId: req.session.userId,
+        },
+        include: User,
+      });
+
+      res.render("myOrders", {
+        orders,
+        membership,
+        role: req.session.role,
+        name: req.session.name,
+        formatRupiah,
+      });
     } catch (error) {
       res.send(error);
     }
@@ -283,6 +324,7 @@ class Controller {
       const { quantity } = req.body;
 
       const menu = await Menu.findByPk(menuId);
+
       let order = await Order.findOne({
         where: {
           UserId: req.session.userId,
@@ -297,6 +339,14 @@ class Controller {
           totalPrice: 0,
           UserId: req.session.userId,
         });
+      }
+
+      if (Number(quantity) <= 0) {
+        return res.send("Quantity harus lebih dari 0");
+      }
+
+      if (Number(quantity) > menu.stock) {
+        return res.send("Stock tidak mencukupi");
       }
 
       const subtotal = menu.price * quantity;
@@ -321,6 +371,68 @@ class Controller {
       await menu.update({
         stock: menu.stock - Number(quantity),
       });
+
+      await MembershipCard.updatePoints(req.session.userId, subtotal);
+
+      res.redirect("/orders");
+    } catch (error) {
+      res.send(error);
+    }
+  }
+
+  static async downloadPDF(req, res) {
+    try {
+      const { id } = req.params;
+
+      const order = await Order.findByPk(id, {
+        include: [
+          User,
+          {
+            model: OrderDetail,
+            include: {
+              model: Menu,
+              include: Category,
+            },
+          },
+        ],
+      });
+
+      const doc = new PDFDocument();
+
+      res.setHeader(
+        "Content-Disposition",
+        `attachment; filename=Invoice-${order.id}.pdf`,
+      );
+
+      res.setHeader("Content-Type", "application/pdf");
+
+      doc.pipe(res);
+
+      doc.fontSize(22).text("CERITANYA KOPI", {
+        align: "center",
+      });
+
+      doc.moveDown();
+
+      doc.fontSize(14).text(`Invoice #${order.id}`);
+      doc.text(`Customer : ${order.User.name}`);
+      doc.text(`Date : ${order.createdAt.toLocaleDateString()}`);
+
+      doc.moveDown();
+
+      order.OrderDetails.forEach((detail) => {
+        doc.text(
+          `${detail.Menu.name} x ${detail.quantity} = Rp ${detail.subtotal}`,
+        );
+      });
+
+      doc.moveDown();
+
+      doc.fontSize(16).text(`Total : Rp ${order.totalPrice}`, {
+        align: "right",
+      });
+
+      doc.end();
     } catch (error) {
       res.send(error);
     }

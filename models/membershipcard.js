@@ -2,11 +2,30 @@
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class MembershipCard extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
+    static async updatePoints(UserId, subtotal) {
+      const membership = await MembershipCard.findOne({
+        where: {
+          UserId,
+        },
+      });
+
+      const earnedPoints = Math.floor(subtotal / 1000);
+
+      const newPoints = membership.points + earnedPoints;
+
+      let level = "Bronze";
+
+      if (newPoints >= 300) {
+        level = "Gold";
+      } else if (newPoints >= 100) {
+        level = "Silver";
+      }
+
+      await membership.update({
+        points: newPoints,
+        level,
+      });
+    }
     static associate(models) {
       MembershipCard.belongsTo(models.User, {
         foreignKey: "UserId",

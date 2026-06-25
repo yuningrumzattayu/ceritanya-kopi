@@ -2,7 +2,7 @@
 
 <div class="container mt-5">
   <div class="row">
-    <!-- Membership Card -->
+
     <div class="col-md-4">
       <div class="card border-warning shadow">
         <div class="card-header bg-warning">
@@ -14,7 +14,6 @@
             <strong>Name</strong><br>
             <%= membership.User.name %>
           </p>
-
           <p>
             <strong>Card Number</strong><br>
             <%= membership.cardNumber %>
@@ -37,40 +36,50 @@
     <div class="col-md-8">
       <div class="card shadow">
         <div class="card-header bg-dark text-white">
-          <h4>Order History</h4>
+          <h4>My Orders</h4>
         </div>
 
         <div class="card-body">
+
           <% if (orders.length === 0) { %>
+
             <h4 class="text-center">No Orders Yet</h4>
+
           <% } %>
 
           <% orders.forEach(order => { %>
+
             <div class="card mb-3">
               <div class="card-body">
+
                 <h5>Order #<%= order.id %></h5>
+
                 <p>
                   <%= order.createdAt.toLocaleDateString() %>
                 </p>
 
                 <ul class="list-group mb-3">
-                  <% order.Menus.forEach(menu => { %>
+
+                  <% order.OrderDetails.forEach(detail => { %>
+
                     <li class="list-group-item d-flex justify-content-between">
+
                       <div>
-                        <strong><%= menu.name %></strong>
-                        <br>
-                        <small><%= menu.Category.name %></small>
+                        <strong><%= detail.Menu.name %></strong>
                       </div>
 
                       <div>
-                        Qty : <%= menu.OrderDetail.quantity %>
+                        Qty : <%= detail.quantity %>
                       </div>
+
                     </li>
+
                   <% }) %>
+
                 </ul>
 
                 <h5 class="text-success">
-                  Total : <%= order.formatTotal %>
+                  Total : <%= formatRupiah(order.totalPrice) %>
                 </h5>
 
                 <a
@@ -79,12 +88,16 @@
                 >
                   Download PDF
                 </a>
+
               </div>
             </div>
+
           <% }) %>
+
         </div>
       </div>
     </div>
+
   </div>
 </div>
 
