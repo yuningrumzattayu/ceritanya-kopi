@@ -8,6 +8,7 @@ const {
 } = require("../models");
 const bcrypt = require("bcryptjs");
 const { formatRupiah } = require("../helpers/helper");
+const { Op } = require('sequelize');
 
 class Controller {
   // login register
@@ -109,12 +110,32 @@ class Controller {
   // Menu
   static async menuList(req, res) {
     try {
-      let menus = await Menu.findAll({
-        include: Category,
-      });
+      const {search} = req.query
+
+      let option = {
+        include: Category
+      }
+      if(search){
+        option.where = {
+          [Op.or]: [
+            {
+              name: {
+                [Op.iLike]: `%${search}%`
+              }
+            },
+            {
+              "$Category.name$": {
+                [Op.iLike]: `%${search}%`
+              }
+            }
+          ]
+        }
+      }
+      let menus = await Menu.findAll(option);
 
       res.render("menus", {
         menus,
+        search,
         formatRupiah,
         role: req.session.role,
         name: req.session.name,
@@ -231,6 +252,7 @@ class Controller {
   // Order
   static async orderHistory(req, res) {
     try {
+
     } catch (error) {
       res.send(error);
     }
