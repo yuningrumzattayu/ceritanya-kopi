@@ -3,64 +3,80 @@
     "name": "Americano",
     "price": 25000,
     "stock": 20,
-    "imageUrl": "americano.jpg",
-    "description": "Espresso dengan tambahan air panas.",
+    "imageUrl": "Americano.ppg",
+    "description": "Minuman kopi klasik dengan karakter espresso yang tetap terasa, namun lebih ringan dan mudah dinikmati.",
     "CategoryId": 1
   },
   {
     "name": "Latte",
     "price": 30000,
     "stock": 15,
-    "imageUrl": "latte.jpg",
-    "description": "Espresso dengan susu steamed yang lembut.",
+    "imageUrl": "Latte.png",
+    "description": "Perpaduan espresso dan susu segar dengan tekstur yang lembut serta cita rasa kopi yang ringan dan seimbang.",
     "CategoryId": 1
   },
   {
     "name": "Cappuccino",
     "price": 32000,
     "stock": 12,
-    "imageUrl": "cappuccino.jpg",
-    "description": "Perpaduan espresso, susu, dan foam tebal.",
+    "imageUrl": "Cappuccino.png",
+    "description": "Minuman kopi klasik dengan kombinasi espresso, susu, dan busa susu yang creamy, menghasilkan tekstur lembut dan cita rasa yang kaya.",
     "CategoryId": 1
   },
   {
     "name": "Matcha Latte",
     "price": 35000,
     "stock": 10,
-    "imageUrl": "matcha-latte.jpg",
-    "description": "Matcha premium Jepang dengan susu segar.",
+    "imageUrl": "Matcha-Latte.png",
+    "description": "Matcha pilihan yang dipadukan dengan susu segar, menciptakan keseimbangan sempurna antara rasa teh hijau yang khas dan tekstur yang lembut.",
     "CategoryId": 2
   },
   {
     "name": "Lemon Tea",
     "price": 20000,
     "stock": 18,
-    "imageUrl": "lemon-tea.jpg",
-    "description": "Teh hitam dengan perasan lemon segar.",
+    "imageUrl": "Lemon-Tea.png",
+    "description": "Teh yang diseduh sempurna dengan sentuhan lemon segar, memberikan sensasi ringan dan menyegarkan di setiap tegukan.",
     "CategoryId": 2
   },
   {
     "name": "Croissant",
     "price": 18000,
     "stock": 8,
-    "imageUrl": "croissant.jpg",
-    "description": "Croissant butter yang renyah di luar dan lembut di dalam.",
+    "imageUrl": "Croissant.png",
+    "description": "Croissant panggang dengan tekstur flaky berlapis dan aroma butter yang kaya, sempurna untuk dinikmati bersama kopi atau teh.",
     "CategoryId": 3
   },
   {
-    "name": "Chocolate Cake",
+    "name": "Tiramisu",
     "price": 28000,
     "stock": 6,
-    "imageUrl": "chocolate-cake.jpg",
-    "description": "Chocolate cake lembut dengan cokelat premium.",
+    "imageUrl": "Tiramisu.png",
+    "description": "Perpaduan creamy mascarpone, espresso, dan cocoa powder yang menghasilkan tekstur lembut serta cita rasa yang kaya dan berkelas..",
     "CategoryId": 3
   },
   {
-    "name": "Cheesecake",
+    "name": "French Toast",
     "price": 30000,
     "stock": 5,
-    "imageUrl": "cheesecake.jpg",
-    "description": "Cheesecake creamy dengan rasa keju yang kaya.",
+    "imageUrl": "french-toast.jpg",
+    "description": "Roti brioche yang direndam dalam campuran telur dan susu, dipanggang hingga golden brown, lalu disajikan dengan topping pilihan.",
     "CategoryId": 3
+  },
+  {
+    "name": "Masala Tea",
+    "price": 30000,
+    "stock": 18,
+    "imageUrl": "Masala-Tea.png",
+    "description": "Teh rempah khas India dengan kombinasi jahe, kayu manis, kapulaga, dan cengkeh. Hangat, wangi, dan penuh karakter.",
+    "CategoryId": 2
+  },
+  {
+    "name": "Ice Lychee Tea",
+    "price": 25000,
+    "stock": 18,
+    "imageUrl": "Ice-Lychee-Tea.png",
+    "description": "Teh dingin yang dipadukan dengan aroma dan rasa leci yang khas, menciptakan minuman yang manis, segar, dan menyegarkan.",
+    "CategoryId": 2
   }
 ]
