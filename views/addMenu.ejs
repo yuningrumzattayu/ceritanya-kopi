@@ -1,0 +1,74 @@
+<%- include("partials/navbarUser") %>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-7">
+             <div class="card shadow">
+                <div class="card-header bg-dark text-white">
+                    <h3>Add Menu</h3>
+                </div>
+                <div class="card-body">
+                    <form action="/menus/add" method="POST">
+                        <div class="mb-3">
+                            <label>Name</label>
+                            <input
+                                type="text"
+                                class="form-control"
+                                name="name">
+                        </div>
+                        <div class="mb-3">
+                            <label>Price</label>
+                            <input
+                                type="number"
+                                class="form-control"
+                                name="price">
+                        </div>
+
+                        <div class="mb-3">
+                            <label>Stock</label>
+                          <input
+                                type="number"
+                                class="form-control"
+                                name="stock">
+
+                        </div>
+
+                        <div class="mb-3">
+                            <label>Image URL</label>
+                              <input
+                                type="text"
+                                class="form-control"
+                                name="imageUrl">
+                        </div>
+
+                        <div class="mb-3">
+                            <label>Description</label>
+                            <textarea
+                                class="form-control"
+                                rows="3"
+                                name="description"></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label>Category</label>
+                            <select
+                                class="form-select"
+                                name="CategoryId">
+                                <% categories.forEach(category=>{ %>
+                                    <option value="<%= category.id %>">
+                                        <%= category.name %>
+                                    </option>
+                                <% }) %>
+                            </select>
+                        </div>
+                        <button class="btn btn-success w-100">
+                            Save Menu
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include("partials/footer") %>

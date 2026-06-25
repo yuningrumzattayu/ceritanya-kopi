@@ -1,0 +1,91 @@
+<%- include("partials/navbarUser") %>
+
+<div class="container mt-5">
+  <div class="row">
+    <!-- Membership Card -->
+    <div class="col-md-4">
+      <div class="card border-warning shadow">
+        <div class="card-header bg-warning">
+          <h4>Membership Card</h4>
+        </div>
+
+        <div class="card-body">
+          <p>
+            <strong>Name</strong><br>
+            <%= membership.User.name %>
+          </p>
+
+          <p>
+            <strong>Card Number</strong><br>
+            <%= membership.cardNumber %>
+          </p>
+
+          <p>
+            <strong>Level</strong><br>
+            <%= membership.level %>
+          </p>
+
+          <p>
+            <strong>Points</strong><br>
+            <%= membership.points %>
+          </p>
+        </div>
+      </div>
+    </div>
+
+  
+    <div class="col-md-8">
+      <div class="card shadow">
+        <div class="card-header bg-dark text-white">
+          <h4>Order History</h4>
+        </div>
+
+        <div class="card-body">
+          <% if (orders.length === 0) { %>
+            <h4 class="text-center">No Orders Yet</h4>
+          <% } %>
+
+          <% orders.forEach(order => { %>
+            <div class="card mb-3">
+              <div class="card-body">
+                <h5>Order #<%= order.id %></h5>
+                <p>
+                  <%= order.createdAt.toLocaleDateString() %>
+                </p>
+
+                <ul class="list-group mb-3">
+                  <% order.Menus.forEach(menu => { %>
+                    <li class="list-group-item d-flex justify-content-between">
+                      <div>
+                        <strong><%= menu.name %></strong>
+                        <br>
+                        <small><%= menu.Category.name %></small>
+                      </div>
+
+                      <div>
+                        Qty : <%= menu.OrderDetail.quantity %>
+                      </div>
+                    </li>
+                  <% }) %>
+                </ul>
+
+                <h5 class="text-success">
+                  Total : <%= order.formatTotal %>
+                </h5>
+
+                <a
+                  href="/orders/pdf/<%= order.id %>"
+                  class="btn btn-outline-dark"
+                >
+                  Download PDF
+                </a>
+              </div>
+            </div>
+          <% }) %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include("partials/footer") %>
