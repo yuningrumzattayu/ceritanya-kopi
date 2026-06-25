@@ -1,0 +1,66 @@
+[
+  {
+    "name": "Americano",
+    "price": 25000,
+    "stock": 20,
+    "imageUrl": "americano.jpg",
+    "description": "Espresso dengan tambahan air panas.",
+    "CategoryId": 1
+  },
+  {
+    "name": "Latte",
+    "price": 30000,
+    "stock": 15,
+    "imageUrl": "latte.jpg",
+    "description": "Espresso dengan susu steamed yang lembut.",
+    "CategoryId": 1
+  },
+  {
+    "name": "Cappuccino",
+    "price": 32000,
+    "stock": 12,
+    "imageUrl": "cappuccino.jpg",
+    "description": "Perpaduan espresso, susu, dan foam tebal.",
+    "CategoryId": 1
+  },
+  {
+    "name": "Matcha Latte",
+    "price": 35000,
+    "stock": 10,
+    "imageUrl": "matcha-latte.jpg",
+    "description": "Matcha premium Jepang dengan susu segar.",
+    "CategoryId": 2
+  },
+  {
+    "name": "Lemon Tea",
+    "price": 20000,
+    "stock": 18,
+    "imageUrl": "lemon-tea.jpg",
+    "description": "Teh hitam dengan perasan lemon segar.",
+    "CategoryId": 2
+  },
+  {
+    "name": "Croissant",
+    "price": 18000,
+    "stock": 8,
+    "imageUrl": "croissant.jpg",
+    "description": "Croissant butter yang renyah di luar dan lembut di dalam.",
+    "CategoryId": 3
+  },
+  {
+    "name": "Chocolate Cake",
+    "price": 28000,
+    "stock": 6,
+    "imageUrl": "chocolate-cake.jpg",
+    "description": "Chocolate cake lembut dengan cokelat premium.",
+    "CategoryId": 3
+  },
+  {
+    "name": "Cheesecake",
+    "price": 30000,
+    "stock": 5,
+    "imageUrl": "cheesecake.jpg",
+    "description": "Cheesecake creamy dengan rasa keju yang kaya.",
+    "CategoryId": 3
+  }
+]
