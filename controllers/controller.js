@@ -110,9 +110,18 @@ class Controller {
       }
       if(search){
         option.where = {
-          name : {
-            [Op.iLike] : `%${search}%`
-          }
+          [Op.or]: [
+            {
+              name: {
+                [Op.iLike]: `%${search}%`
+              }
+            },
+            {
+              "$Category.name$": {
+                [Op.iLike]: `%${search}%`
+              }
+            }
+          ]
         }
       }
       let menus = await Menu.findAll(option);
