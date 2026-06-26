@@ -2,6 +2,8 @@
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class MembershipCard extends Model {
+
+    // static method
     static async updatePoints(UserId, subtotal) {
       const membership = await MembershipCard.findOne({
         where: {

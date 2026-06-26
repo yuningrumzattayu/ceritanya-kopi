@@ -5,11 +5,6 @@ function formatRupiah(value) {
   }).format(value);
 }
 
-function formatDate(date) {
-  return new Date(date).toLocaleDateString("id-ID");
-}
-
 module.exports = {
   formatRupiah,
-  formatDate,
 };
