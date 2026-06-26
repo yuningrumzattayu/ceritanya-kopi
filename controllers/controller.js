@@ -240,6 +240,7 @@ class Controller {
     }
   }
 
+  // promise chaining
   static deleteMenu(req, res) {
     let deletedMenu;
 
@@ -322,6 +323,7 @@ class Controller {
     try {
       const { menuId } = req.params;
       const { quantity } = req.body;
+      const qty = Number(quantity);
 
       const menu = await Menu.findByPk(menuId);
 
@@ -341,20 +343,20 @@ class Controller {
         });
       }
 
-      if (Number(quantity) <= 0) {
+      if (qty <= 0) {
         return res.send("Quantity harus lebih dari 0");
       }
 
-      if (Number(quantity) > menu.stock) {
+      if (qty > menu.stock) {
         return res.send("Stock tidak mencukupi");
       }
 
-      const subtotal = menu.price * quantity;
+      const subtotal = menu.price * qty;
 
       await OrderDetail.create({
         OrderId: order.id,
         MenuId: menu.id,
-        quantity,
+        quantity: qty,
         subtotal,
       });
 
@@ -369,7 +371,7 @@ class Controller {
       });
 
       await menu.update({
-        stock: menu.stock - Number(quantity),
+        stock: menu.stock - qty,
       });
 
       await MembershipCard.updatePoints(req.session.userId, subtotal);
@@ -384,7 +386,11 @@ class Controller {
     try {
       const { id } = req.params;
 
-      const order = await Order.findByPk(id, {
+      const order = await Order.findOne({
+        where: {
+          id,
+          UserId: req.session.userId,
+        },
         include: [
           User,
           {
@@ -396,6 +402,10 @@ class Controller {
           },
         ],
       });
+
+      if (!order) {
+        return res.send("Invoice tidak ditemukan");
+      }
 
       const doc = new PDFDocument();
 
@@ -422,13 +432,13 @@ class Controller {
 
       order.OrderDetails.forEach((detail) => {
         doc.text(
-          `${detail.Menu.name} x ${detail.quantity} = Rp ${detail.subtotal}`,
+          `${detail.Menu.name} x ${detail.quantity} = Rp ${formatRupiah(detail.subtotal)}`,
         );
       });
 
       doc.moveDown();
 
-      doc.fontSize(16).text(`Total : Rp ${order.totalPrice}`, {
+      doc.fontSize(16).text(`Total : Rp ${formatRupiah(order.totalPrice)}`, {
         align: "right",
       });
 

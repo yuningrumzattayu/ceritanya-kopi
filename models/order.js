@@ -21,6 +21,15 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "OrderId",
       });
     }
+
+    // getter
+
+    get formatTotal() {
+      return new Intl.NumberFormat("id-ID", {
+        style: "currency",
+        currency: "IDR",
+      }).format(this.totalPrice);
+    }
   }
   Order.init(
     {
