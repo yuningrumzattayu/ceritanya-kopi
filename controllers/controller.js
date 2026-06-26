@@ -321,9 +321,21 @@ class Controller {
   static async postOrder(req, res) {
     try {
       const { menuId } = req.params;
-      const { quantity } = req.body;
+      const qty = Number(req.body.quantity);
+
+      if (isNaN(qty) || qty <= 0) {
+        return res.send("Quantity tidak valid");
+      }
 
       const menu = await Menu.findByPk(menuId);
+
+      if (!menu) {
+        return res.send("Menu tidak ditemukan");
+      }
+
+      if (qty > menu.stock) {
+        return res.send("Stock tidak mencukupi");
+      }
 
       let order = await Order.findOne({
         where: {
@@ -341,22 +353,29 @@ class Controller {
         });
       }
 
-      if (Number(quantity) <= 0) {
-        return res.send("Quantity harus lebih dari 0");
-      }
+      const subtotal = menu.price * qty;
 
-      if (Number(quantity) > menu.stock) {
-        return res.send("Stock tidak mencukupi");
-      }
-
-      const subtotal = menu.price * quantity;
-
-      await OrderDetail.create({
-        OrderId: order.id,
-        MenuId: menu.id,
-        quantity,
-        subtotal,
+      const existingDetail = await OrderDetail.findOne({
+        where: {
+          OrderId: order.id,
+          MenuId: menu.id,
+        },
       });
+
+      if (existingDetail) {
+        await existingDetail.update({
+          quantity: existingDetail.quantity + qty,
+          subtotal:
+            existingDetail.subtotal + subtotal,
+        });
+      } else {
+        await OrderDetail.create({
+          OrderId: order.id,
+          MenuId: menu.id,
+          quantity: qty,
+          subtotal,
+        });
+      }
 
       const totalPrice = await OrderDetail.sum("subtotal", {
         where: {
@@ -369,12 +388,16 @@ class Controller {
       });
 
       await menu.update({
-        stock: menu.stock - Number(quantity),
+        stock: menu.stock - qty,
       });
 
-      await MembershipCard.updatePoints(req.session.userId, subtotal);
+      await MembershipCard.updatePoints(
+        req.session.userId,
+        subtotal
+      );
 
       res.redirect("/orders");
+
     } catch (error) {
       res.send(error);
     }
